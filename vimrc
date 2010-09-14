@@ -97,10 +97,10 @@ let g:mapleader = ","
 nmap <leader>w :w!<cr>
 
 " Fast editing of the .vimrc
-map <leader>e :e! ~/vimfiles/vimrc<cr>
+map <leader>e :e! c:/dev/othervim.git/vimrc<cr>
 
 " When vimrc is edited, reload it
-autocmd! bufwritepost vimrc source ~/vimfiles/vimrc
+autocmd! bufwritepost vimrc source c:/dev/othervim.git/vimrc
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -121,7 +121,7 @@ set hid "Change buffer - without saving
 set backspace=eol,start,indent
 set whichwrap+=<,>,h,l
 
-set ignorecase "Ignore case when searching
+set smartcase "ignore case if search term is all lower case
 
 set hlsearch "Highlight search things
 
@@ -149,7 +149,7 @@ if MySys() == "mac"
   set guifont=EnvyCodeR:h12.00
   set shell=/bin/bash
 elseif MySys() == "windows"
-  set gfn=Bitstream\ Vera\ Sans\ Mono:h9
+  set gfn=Envy_Code_R:h10.00
 elseif MySys() == "linux"
   set guifont=Bitstream\ Vera\ Sans\ Mono\ 9
   set shell=/bin/bash
