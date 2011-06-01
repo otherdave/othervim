@@ -99,6 +99,8 @@ nmap <leader>w :w!<cr>
 " Fast editing of the .vimrc
 map <leader>e :e! c:/dev/othervim.git/vimrc<cr>
 
+map <leader>s :e! ~/Desktop/status.txt<cr>
+
 " When vimrc is edited, reload it
 autocmd! bufwritepost vimrc source c:/dev/othervim.git/vimrc
 
@@ -121,7 +123,10 @@ set hid "Change buffer - without saving
 set backspace=eol,start,indent
 set whichwrap+=<,>,h,l
 
-set smartcase "ignore case if search term is all lower case
+" ignore case if search term is all lower case.
+" requires ignorecase too
+set ignorecase
+set smartcase 
 
 set hlsearch "Highlight search things
 
@@ -157,15 +162,15 @@ endif
 
 if has("gui_running")
   set guioptions-=T
-  set background=dark
+  set background=light
   set t_Co=256
-  set background=dark
-  colorscheme moria
+  set background=light
+  colorscheme solarized
 
   set nu
 else
-  colorscheme moria
   set background=dark
+  colorscheme solarized
   
   set nonu
 endif
@@ -409,7 +414,7 @@ inoremap $e ""<esc>i
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General Abbrevs
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-iab xdate <c-r>=strftime("%d/%m/%y %H:%M:%S")<cr>
+iab xdate <c-r>=strftime("%Y%m%d %H:%M:%S - %A")<cr>
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -532,7 +537,7 @@ au FileType python map <buffer> <leader>D ?def
 """"""""""""""""""""""""""""""
 " => JavaScript section
 """""""""""""""""""""""""""""""
-au FileType javascript call JavaScriptFold()
+"au FileType javascript call JavaScriptFold()
 au FileType javascript setl fen
 au FileType javascript setl nocindent
 
