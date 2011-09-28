@@ -172,7 +172,7 @@ if has("gui_running")
 
   set nu
 else
-  set background=light
+  set background=dark
   colorscheme desert
   
   set nonu
