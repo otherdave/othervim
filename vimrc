@@ -1,81 +1,9 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Maintainer: amix the lucky stiff
-"             http://amix.dk - amix@amix.dk
+" Maintainer: David Stahl
+"             http://otherdave.com - otherdave@gmail.com
 "
-" Version: 3.3 - 21/01/10 01:05:46
-"
-" Blog_post: 
-"       http://amix.dk/blog/post/19486#The-ultimate-vim-configuration-vimrc
-" Syntax_highlighted:
-"       http://amix.dk/vim/vimrc.html
-" Raw_version: 
-"       http://amix.dk/vim/vimrc.txt
-"
-" How_to_Install:
-"    $ mkdir ~/.vim_runtime
-"    $ svn co svn://orangoo.com/vim ~/.vim_runtime
-"    $ cat ~/.vim_runtime/install.sh
-"    $ sh ~/.vim_runtime/install.sh <system>
-"      <sytem> can be `mac`, `linux` or `windows`
-"
-" How_to_Upgrade:
-"    $ svn update ~/.vim_runtime
-"
-" Sections:
-"    -> General
-"    -> VIM user interface
-"    -> Colors and Fonts
-"    -> Files and backups
-"    -> Text, tab and indent related
-"    -> Visual mode related
-"    -> Command mode related
-"    -> Moving around, tabs and buffers
-"    -> Statusline
-"    -> Parenthesis/bracket expanding
-"    -> General Abbrevs
-"    -> Editing mappings
-"
-"    -> Cope
-"    -> Minibuffer plugin
-"    -> Omni complete functions
-"    -> Python section
-"    -> JavaScript section
-"
-" Plugins_Included:
-"     > minibufexpl.vim - http://www.vim.org/scripts/script.php?script_id=159
-"       Makes it easy to get an overview of buffers:
-"           info -> :e ~/.vim_runtime/plugin/minibufexpl.vim
-"
-"     > bufexplorer - http://www.vim.org/scripts/script.php?script_id=42
-"       Makes it easy to switch between buffers:
-"           info -> :help bufExplorer
-"
-"     > yankring.vim - http://www.vim.org/scripts/script.php?script_id=1234
-"       Emacs's killring, useful when using the clipboard:
-"           info -> :help yankring
-"
-"     > surround.vim - http://www.vim.org/scripts/script.php?script_id=1697
-"       Makes it easy to work with surrounding text:
-"           info -> :help surround
-"
-"     > snipMate.vim - http://www.vim.org/scripts/script.php?script_id=2540
-"       Snippets for many languages (similar to TextMate's):
-"           info -> :help snipMate
-"
-"     > fuzzyfinder - http://www.vim.org/scripts/script.php?script_id=1984
-"       Find files fast (similar to TextMate's feature):
-"           info -> :help fuzzyfinder@en
-"
-"  Revisions:
-"     > 3.3: Added syntax highlighting for Mako mako.vim 
-"     > 3.2: Turned on python_highlight_all for better syntax
-"            highlighting for Python
-"     > 3.1: Added revisions ;) and bufexplorer.vim
-"
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Sets how many lines of history VIM has to remember
@@ -100,13 +28,19 @@ let g:mapleader = ","
 nmap <leader>w :w!<cr>
 
 " Fast editing of the .vimrc
-map <leader>e :e! c:/dev/othervim.git/vimrc<cr>
+if MySys() == "mac"
+  map <leader>e :e! ~/othervim.git/vimrc<cr>
+  autocmd! bufwritepost vimrc source ~/othervim.git/vimrc
+elseif MySys() == "windows"
+  map <leader>e :e! c:/dev/othervim.git/vimrc<cr>
+  autocmd! bufwritepost vimrc source c:/dev/othervim.git/vimrc
+elseif MySys() == "linux"
+  map <leader>e :e! ~/othervim.git/vimrc<cr>
+  autocmd! bufwritepost vimrc source ~/othervim.git/vimrc
+endif
+
 
 map <leader>s :e! ~/Desktop/status.txt<cr>
-
-" When vimrc is edited, reload it
-autocmd! bufwritepost vimrc source c:/dev/othervim.git/vimrc
-
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => VIM user interface
@@ -126,7 +60,7 @@ set hid "Change buffer - without saving
 set backspace=eol,start,indent
 set whichwrap+=<,>,h,l
 
-" ignore case if search term is all lower case.
+" ignore case if search term is all lower case (smartcase)
 " requires ignorecase too
 set ignorecase
 set smartcase 
@@ -145,6 +79,8 @@ set noerrorbells
 set novisualbell
 set t_vb=
 
+" Always have line numbers
+set nu
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Colors and Fonts
@@ -169,13 +105,9 @@ if has("gui_running")
   set t_Co=256
   set background=light
   colorscheme solarized
-
-  set nu
 else
   set background=dark
   colorscheme desert
-  
-  set nonu
 endif
 
 set encoding=utf8
