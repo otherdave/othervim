@@ -29,7 +29,7 @@ nmap <leader>w :w!<cr>
 
 " Fast editing of the .vimrc
 if MySys() == "mac"
-  map <leader>e :e! ~/dev/othervim/vimrc<cr>
+  map <leader>e :e! ~/dev/othervim.git/vimrc<cr>
   autocmd! bufwritepost vimrc source ~/dev/othervim/vimrc
 elseif MySys() == "windows"
   map <leader>e :e! c:/dev/othervim.git/vimrc<cr>
